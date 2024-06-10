@@ -11,7 +11,7 @@
 
     <section class="flex w-full items-center justify-center space-x-4 py-4 md:pb-10">
       <NuxtLink to="/new">
-        <Button>
+        <Button size="lg">
           <Icon name="lucide:plus" class="mr-1" />
           我要添加内容
         </Button>

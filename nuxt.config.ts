@@ -7,7 +7,11 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     'nuxt-icon',
+    '@nuxthub/core',
   ],
+  hub: {
+    database: true,
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
