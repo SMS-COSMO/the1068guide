@@ -13,7 +13,7 @@
 
   <div class="border-b min-h-screen">
     <div class="container max-w-screen-lg px-4 md:px-8">
-      <main class="py-6">
+      <main class="py-6 lg:py-10">
         <slot />
       </main>
     </div>
