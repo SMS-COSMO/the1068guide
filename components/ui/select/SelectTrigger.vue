@@ -1,20 +1,3 @@
-<script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
-import { SelectIcon, SelectTrigger, type SelectTriggerProps, useForwardProps } from 'radix-vue'
-import { CaretSortIcon } from '@radix-icons/vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<SelectTriggerProps & { class?: HTMLAttributes['class'] }>()
-
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
-
-  return delegated
-})
-
-const forwardedProps = useForwardProps(delegatedProps)
-</script>
-
 <template>
   <SelectTrigger
     v-bind="forwardedProps"
@@ -29,3 +12,20 @@ const forwardedProps = useForwardProps(delegatedProps)
     </SelectIcon>
   </SelectTrigger>
 </template>
+
+<script setup lang="ts">
+import { type HTMLAttributes, computed } from 'vue';
+import { SelectIcon, SelectTrigger, type SelectTriggerProps, useForwardProps } from 'radix-vue';
+import { CaretSortIcon } from '@radix-icons/vue';
+import { cn } from '@/lib/utils';
+
+const props = defineProps<SelectTriggerProps & { class?: HTMLAttributes['class'] }>();
+
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props;
+
+  return delegated;
+});
+
+const forwardedProps = useForwardProps(delegatedProps);
+</script>

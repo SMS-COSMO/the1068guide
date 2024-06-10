@@ -1,26 +1,3 @@
-<script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
-import {
-  SelectItem,
-  SelectItemIndicator,
-  type SelectItemProps,
-  SelectItemText,
-  useForwardProps,
-} from 'radix-vue'
-import { CheckIcon } from '@radix-icons/vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<SelectItemProps & { class?: HTMLAttributes['class'] }>()
-
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
-
-  return delegated
-})
-
-const forwardedProps = useForwardProps(delegatedProps)
-</script>
-
 <template>
   <SelectItem
     v-bind="forwardedProps"
@@ -42,3 +19,26 @@ const forwardedProps = useForwardProps(delegatedProps)
     </SelectItemText>
   </SelectItem>
 </template>
+
+<script setup lang="ts">
+import { type HTMLAttributes, computed } from 'vue';
+import {
+  SelectItem,
+  SelectItemIndicator,
+  type SelectItemProps,
+  SelectItemText,
+  useForwardProps,
+} from 'radix-vue';
+import { CheckIcon } from '@radix-icons/vue';
+import { cn } from '@/lib/utils';
+
+const props = defineProps<SelectItemProps & { class?: HTMLAttributes['class'] }>();
+
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props;
+
+  return delegated;
+});
+
+const forwardedProps = useForwardProps(delegatedProps);
+</script>

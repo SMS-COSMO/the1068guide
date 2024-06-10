@@ -1,37 +1,3 @@
-<script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
-import {
-  SelectContent,
-  type SelectContentEmits,
-  type SelectContentProps,
-  SelectPortal,
-  SelectViewport,
-  useForwardPropsEmits,
-} from 'radix-vue'
-import { SelectScrollDownButton, SelectScrollUpButton } from '.'
-import { cn } from '@/lib/utils'
-
-defineOptions({
-  inheritAttrs: false,
-})
-
-const props = withDefaults(
-  defineProps<SelectContentProps & { class?: HTMLAttributes['class'] }>(),
-  {
-    position: 'popper',
-  },
-)
-const emits = defineEmits<SelectContentEmits>()
-
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
-
-  return delegated
-})
-
-const forwarded = useForwardPropsEmits(delegatedProps, emits)
-</script>
-
 <template>
   <SelectPortal>
     <SelectContent
@@ -51,3 +17,37 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
     </SelectContent>
   </SelectPortal>
 </template>
+
+<script setup lang="ts">
+import { type HTMLAttributes, computed } from 'vue';
+import {
+  SelectContent,
+  type SelectContentEmits,
+  type SelectContentProps,
+  SelectPortal,
+  SelectViewport,
+  useForwardPropsEmits,
+} from 'radix-vue';
+import { SelectScrollDownButton, SelectScrollUpButton } from '.';
+import { cn } from '@/lib/utils';
+
+defineOptions({
+  inheritAttrs: false,
+});
+
+const props = withDefaults(
+  defineProps<SelectContentProps & { class?: HTMLAttributes['class'] }>(),
+  {
+    position: 'popper',
+  },
+);
+const emits = defineEmits<SelectContentEmits>();
+
+const delegatedProps = computed(() => {
+  const { class: _, ...delegated } = props;
+
+  return delegated;
+});
+
+const forwarded = useForwardPropsEmits(delegatedProps, emits);
+</script>

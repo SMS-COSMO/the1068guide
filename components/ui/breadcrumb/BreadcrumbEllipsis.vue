@@ -1,13 +1,3 @@
-<script lang="ts" setup>
-import type { HTMLAttributes } from 'vue'
-import { DotsHorizontalIcon } from '@radix-icons/vue'
-import { cn } from '@/lib/utils'
-
-const props = defineProps<{
-  class?: HTMLAttributes['class']
-}>()
-</script>
-
 <template>
   <span
     role="presentation"
@@ -20,3 +10,13 @@ const props = defineProps<{
     <span class="sr-only">More</span>
   </span>
 </template>
+
+<script lang="ts" setup>
+import type { HTMLAttributes } from 'vue';
+import { DotsHorizontalIcon } from '@radix-icons/vue';
+import { cn } from '@/lib/utils';
+
+const props = defineProps<{
+  class?: HTMLAttributes['class'];
+}>();
+</script>

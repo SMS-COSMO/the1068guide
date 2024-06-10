@@ -1,28 +1,7 @@
 <template>
-  <Breadcrumb class="mb-3">
-    <BreadcrumbList>
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">
-          主页
-        </BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbSeparator />
-      <BreadcrumbItem>
-        <BreadcrumbPage>添加内容</BreadcrumbPage>
-      </BreadcrumbItem>
-    </BreadcrumbList>
-  </Breadcrumb>
+  <PageTitle title="增加新的内容" description="不知道写什么" />
 
-  <div class="mb-6 space-y-1">
-    <p class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-      增加新的内容
-    </p>
-    <p class="text-lg text-muted-foreground">
-      不知道写什么
-    </p>
-  </div>
-
-  <div class="grid lg:grid-cols-2 gap-4 lg:w-1/2">
+  <div class="lg:w-1/4">
     <FormField v-slot="{ componentField }" name="primaryCategory">
       <FormItem>
         <FormLabel>一级类别</FormLabel>
@@ -44,27 +23,28 @@
         <FormMessage />
       </FormItem>
     </FormField>
-
     <FormField v-slot="{ componentField }" name="secondaryCategory">
-      <FormItem>
-        <FormLabel>二级类别</FormLabel>
-        <Select v-bind="componentField">
-          <FormControl>
-            <SelectTrigger>
-              <SelectValue placeholder="请选择" />
-            </SelectTrigger>
-          </FormControl>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem v-for="option in selectedPrimaryCategory?.secondary" :key="option.value" :value="option.value">
-                {{ option.name }}
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        <FormDescription />
-        <FormMessage />
-      </FormItem>
+      <Transition name="fade">
+        <FormItem v-show="selectedPrimaryCategory">
+          <FormLabel>二级类别</FormLabel>
+          <Select v-bind="componentField">
+            <FormControl>
+              <SelectTrigger>
+                <SelectValue placeholder="请选择" />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem v-for="option in selectedPrimaryCategory?.secondary" :key="option.value" :value="option.value">
+                  {{ option.name }}
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <FormDescription />
+          <FormMessage />
+        </FormItem>
+      </Transition>
     </FormField>
   </div>
 
@@ -95,7 +75,7 @@ const formSchema = toTypedSchema(z.object({
   secondaryCategory: z.string(),
   content: z.string(),
 }));
-const { values, handleSubmit } = useForm({ validationSchema: formSchema });
+const { values, handleSubmit, setFieldValue } = useForm({ validationSchema: formSchema });
 
 const guideCategory = [{
   value: 'life',
@@ -149,11 +129,24 @@ const guideCategory = [{
 }];
 
 const selectedPrimaryCategory = computed(
-  () => guideCategory.find(e => e.value === (values.primaryCategory ?? 'life')),
+  () => guideCategory.find(e => e.value === values.primaryCategory),
 );
+watch(selectedPrimaryCategory, () => setFieldValue('secondaryCategory', undefined, false));
 
 const onSubmit = handleSubmit((values) => {
   // TODO
   console.log(values);
 });
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

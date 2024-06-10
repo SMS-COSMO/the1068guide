@@ -12,6 +12,14 @@ export default defineNuxtConfig({
   hub: {
     database: true,
   },
+  routeRules: {
+    '/new': {
+      ssr: false,
+    },
+  },
+  build: {
+    transpile: ['trpc-nuxt'],
+  },
   shadcn: {
     /**
      * Prefix for all the imported component
