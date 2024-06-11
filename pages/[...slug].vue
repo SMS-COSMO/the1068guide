@@ -27,14 +27,15 @@ const category = computed(
   () => categoryMap.find(x => x.value === slugCategory) || categoryMap[0],
 );
 
+const guideList = await $api.guide.query({ primaryCategory: slugCategory });
 const data: Map<TSecondaryCategory, RouterOutput['guide']> = new Map();
 for (const c of categoryMap.find(x => x.value === slugCategory)?.secondary ?? []) {
-  const res = await $api.guide.query({
-    primaryCategory: slugCategory,
-    secondaryCategory: c.value,
-  });
-  if (res)
-    data.set(c.value, res.sort((a, b) => a.id - b.id));
+  data.set(
+    c.value,
+    guideList
+      .filter(x => x.secondaryCategory === c.value)
+      ?.sort((a, b) => a.id - b.id),
+  );
 }
 
 useHead({

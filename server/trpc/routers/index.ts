@@ -9,13 +9,11 @@ export const appRouter = router({
   guide: publicProcedure
     .input(z.object({
       primaryCategory: primaryCategorySchema,
-      secondaryCategory: secondaryCategorySchema,
     }))
     .query(async ({ input }) => {
       return await useDrizzle().query.guidebook.findMany({
         where: and(
           eq(guidebook.primaryCategory, input.primaryCategory),
-          eq(guidebook.secondaryCategory, input.secondaryCategory),
           // --------------- TEST -vvvvv--------------
           eq(guidebook.isReviewed, false),
         ),

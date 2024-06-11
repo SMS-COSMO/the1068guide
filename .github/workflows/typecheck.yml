@@ -1,0 +1,29 @@
+name: Type Check
+
+on: [workflow_dispatch, push]
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install dependencies
+        working-directory: .
+        run: pnpm i
+
+      - name: Install docs deps
+        working-directory: ./docs
+        run: pnpm i
+
+      - name: Run typecheck
+        working-directory: .
+        run: pnpm nuxt typecheck
