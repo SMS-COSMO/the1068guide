@@ -1,4 +1,20 @@
 <template>
+  <Card v-if="error && !list" class="md:mx-auto md:w-1/2">
+    <CardHeader>
+      <CardTitle>
+        请输入管理员密码
+      </CardTitle>
+      <CardDescription>
+        登陆管理系统
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <Input v-model="inputPassword" />
+      <Button class="w-full mt-4" @click="checkPassword">
+        登陆
+      </Button>
+    </CardContent>
+  </Card>
   <Card v-for="post in list" :key="post.id" class="mb-4">
     <CardHeader class="flex flex-row">
       <CardTitle class="text-lg">
@@ -26,13 +42,28 @@ import { useToast } from '~/components/ui/toast';
 import { categoryMap } from '~/constants';
 import { useAdminStore } from '~/store/admin';
 
-const adminStore = useAdminStore();
 const { toast } = useToast();
 const { $api } = useNuxtApp();
 
-const { data: list } = await $api.guideReviewList.useQuery({
+const adminStore = useAdminStore();
+const inputPassword = ref('');
+
+const { data: list, error } = await $api.guideReviewList.useQuery({
   password: adminStore.password,
 });
+
+async function checkPassword() {
+  try {
+    await $api.checkPassword.query({ password: inputPassword.value });
+    adminStore.password = inputPassword.value;
+    toast({ title: '登陆成功' });
+    list.value = await $api.guideReviewList.query({
+      password: adminStore.password,
+    });
+  } catch (err) {
+    toast({ variant: 'destructive', title: '密码错误' });
+  }
+}
 
 async function approve(id: number) {
   try {
