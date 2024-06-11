@@ -7,6 +7,11 @@
       </NuxtLink>
       <div class="flex justify-end gap-2">
         <DarkModeToggle />
+        <NuxtLink to="https://github.com/SMS-COSMO/the1068guide" target="_blank">
+          <Button variant="ghost" size="icon">
+            <Icon name="lucide:github" size="18" />
+          </Button>
+        </NuxtLink>
       </div>
     </div>
   </header>
@@ -24,6 +29,18 @@
       <span class="text-sm">
         Designed by COSMO in 2024.
       </span>
+      <div class="flex gap-2">
+        <NuxtLink to="/admin">
+          <Button variant="ghost" size="icon">
+            <Icon name="lucide:circle-user" size="18" />
+          </Button>
+        </NuxtLink>
+        <NuxtLink to="https://github.com/SMS-COSMO/the1068guide" target="_blank">
+          <Button variant="ghost" size="icon">
+            <Icon name="lucide:github" size="18" />
+          </Button>
+        </NuxtLink>
+      </div>
     </div>
   </footer>
 </template>

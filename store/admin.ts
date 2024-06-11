@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-export const useAdminStore = defineStore('user', () => {
+export const useAdminStore = defineStore('admin', () => {
   const password = ref('');
   return {
     password,

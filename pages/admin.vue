@@ -9,7 +9,7 @@
       </CardDescription>
     </CardHeader>
     <CardContent>
-      <Input v-model="inputPassword" />
+      <Input v-model="inputPassword" type="password" />
       <Button class="w-full mt-4" @click="checkPassword">
         登陆
       </Button>
