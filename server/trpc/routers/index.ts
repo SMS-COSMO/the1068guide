@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { and, eq } from 'drizzle-orm';
 import { publicProcedure, router } from '../trpc';
 import { useDrizzle } from '~/server/utils/drizzle';
-import { guidebook } from '~/server/db/schema';
+import { guidebook } from '~/server/database/schema';
 
 const primaryCategorySchema = z.enum(['life', 'study', 'tips', 'intl']);
 const secondaryCategorySchema = z.enum(['library', 'activity', 'dorm', 'food', 'club', 'humanities', 'science', 'compulsories', 'life', 'study']);
