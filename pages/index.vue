@@ -20,12 +20,12 @@
   </section>
 
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <NuxtLink v-for="(card, i) in cards" :key="i" :to="card.to">
+    <NuxtLink v-for="(card, i) in categoryMap" :key="i" :to="card.to">
       <Card class="relative hover:bg-muted transition-all h-full">
         <CardHeader class="text-xl">
           <Icon :name="card.icon" size="30" class="mb-2" />
           <CardTitle>
-            {{ card.title }}
+            {{ card.name }}
           </CardTitle>
           <CardDescription>
             {{ card.description }}
@@ -38,27 +38,7 @@
 </template>
 
 <script setup lang="ts">
-const cards = [{
-  title: '生活',
-  description: '来了就是深中人',
-  icon: 'lucide:home',
-  to: '/life',
-}, {
-  title: '学习',
-  description: '什么都阻止不了我学习！',
-  icon: 'lucide:book-marked',
-  to: '/study',
-}, {
-  title: '国际体系',
-  description: '国际体系的特供经验',
-  icon: 'lucide:globe',
-  to: '/intl',
-}, {
-  title: '小技巧',
-  description: '在意想不到的时候很有用',
-  icon: 'lucide:lightbulb',
-  to: '/tips',
-}];
+import { categoryMap } from '~/constants';
 
 useHead({
   title: '深中漫游指南',

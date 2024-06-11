@@ -1,25 +1,13 @@
-.tiptap h1,
-.tiptap h2,
-.tiptap h3 {
-  margin: 0.3em 0;
-}
-
 .tiptap p {
-  margin: 0;
+  line-height: 1.75rem;
 }
 
-.tiptap ol,
-.tiptap ul {
-  margin: 0;
-  padding-left: 1.5em;
+.tiptap p:not(:first-child) {
+  margin-top: 0.5rem;
 }
 
 .tiptap a {
   color: var(--primary);
   text-decoration: underline;
   text-underline-offset: 4px;
-}
-
-.tiptap {
-  line-height: 25px;
 }

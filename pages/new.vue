@@ -1,5 +1,5 @@
 <template>
-  <PageTitle title="增加新的内容" description="不知道写什么" />
+  <PageTitle :new-button="false" title="增加新的内容" description="不知道写什么" />
 
   <div class="lg:w-1/4">
     <FormField v-slot="{ componentField }" name="primaryCategory">
@@ -13,7 +13,7 @@
           </FormControl>
           <SelectContent>
             <SelectGroup>
-              <SelectItem v-for="option in guideCategory" :key="option.value" :value="option.value">
+              <SelectItem v-for="option in categoryMap" :key="option.value" :value="option.value">
                 {{ option.name }}
               </SelectItem>
             </SelectGroup>
@@ -65,77 +65,39 @@
 </template>
 
 <script setup lang="ts">
+import * as z from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
+import { categoryMap, primaryCategorySchema, secondaryCategorySchema } from '~/constants';
+import { useToast } from '@/components/ui/toast/use-toast';
 
-import * as z from 'zod';
+const { toast } = useToast();
+const { $api } = useNuxtApp();
 
 const formSchema = toTypedSchema(z.object({
-  primaryCategory: z.string(),
-  secondaryCategory: z.string(),
+  primaryCategory: primaryCategorySchema,
+  secondaryCategory: secondaryCategorySchema,
   content: z.string(),
 }));
-const { values, handleSubmit, setFieldValue } = useForm({ validationSchema: formSchema });
-
-const guideCategory = [{
-  value: 'life',
-  name: '生活篇',
-  secondary: [{
-    value: 'library',
-    name: '图书馆相关',
-  }, {
-    value: 'activity',
-    name: '深中活动',
-  }, {
-    value: 'dorm',
-    name: '宿舍相关',
-  }, {
-    value: 'food',
-    name: '美食地图',
-  }, {
-    value: 'club',
-    name: '社团相关',
-  }],
-}, {
-  value: 'study',
-  name: '学习篇',
-  secondary: [{
-    value: 'humanities',
-    name: '文科',
-  }, {
-    value: 'science',
-    name: '理科',
-  }, {
-    value: 'compulsories',
-    name: '主科（语数英）',
-  }],
-}, {
-  value: 'tips',
-  name: '小技巧篇',
-  secondary: [{
-    value: 'life',
-    name: '生活相关',
-  }, {
-    value: 'study',
-    name: '学习相关',
-  }],
-}, {
-  value: 'intl',
-  name: '国际体系篇',
-  secondary: [{
-    value: 'study',
-    name: '学习相关',
-  }],
-}];
+const form = useForm({ validationSchema: formSchema });
 
 const selectedPrimaryCategory = computed(
-  () => guideCategory.find(e => e.value === values.primaryCategory),
+  () => categoryMap.find(e => e.value === form.values.primaryCategory),
 );
-watch(selectedPrimaryCategory, () => setFieldValue('secondaryCategory', undefined, false));
+watch(selectedPrimaryCategory, () => form.setFieldValue('secondaryCategory', undefined, false));
 
-const onSubmit = handleSubmit((values) => {
-  // TODO
-  console.log(values);
+const onSubmit = form.handleSubmit(async (values) => {
+  try {
+    await $api.new.mutate(values);
+    form.resetForm();
+    toast({
+      title: '投稿成功！',
+      description: '等待管理员审核中~',
+    });
+    navigateTo('/');
+  } catch (err) {
+
+  }
 });
 </script>
 

@@ -3,12 +3,10 @@ import { and, eq } from 'drizzle-orm';
 import { publicProcedure, router } from '../trpc';
 import { useDrizzle } from '~/server/utils/drizzle';
 import { guidebook } from '~/server/database/schema';
-
-const primaryCategorySchema = z.enum(['life', 'study', 'tips', 'intl']);
-const secondaryCategorySchema = z.enum(['library', 'activity', 'dorm', 'food', 'club', 'humanities', 'science', 'compulsories', 'life', 'study']);
+import { primaryCategorySchema, secondaryCategorySchema } from '~/constants';
 
 export const appRouter = router({
-  getReviewedGuide: publicProcedure
+  guide: publicProcedure
     .input(z.object({
       primaryCategory: primaryCategorySchema,
       secondaryCategory: secondaryCategorySchema,
@@ -18,12 +16,13 @@ export const appRouter = router({
         where: and(
           eq(guidebook.primaryCategory, input.primaryCategory),
           eq(guidebook.secondaryCategory, input.secondaryCategory),
-          eq(guidebook.isReviewed, true),
+          // --------------- TEST -vvvvv--------------
+          eq(guidebook.isReviewed, false),
         ),
       });
     }),
 
-  submitNewGuide: publicProcedure
+  new: publicProcedure
     .input(z.object({
       primaryCategory: primaryCategorySchema,
       secondaryCategory: secondaryCategorySchema,
