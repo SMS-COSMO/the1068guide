@@ -1,4 +1,5 @@
 <template>
+  <NuxtLoadingIndicator :color="false" class="z-100 bg-primary/50" />
   <Toaster />
   <NuxtLayout>
     <NuxtPage />

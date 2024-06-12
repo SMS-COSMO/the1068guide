@@ -24,7 +24,7 @@
       </CardTitle>
       <div class="ml-auto space-x-2">
         <Button size="icon" variant="outline" @click="approve(post.id)">
-          <Icon name="lucide:check" />
+          <Icon :name="approvePending ? 'lucide:loader-circle' : 'lucide:check'" :class="[approvePending && 'animate-spin']" />
         </Button>
         <Button size="icon" variant="outline" @click="reject(post.id)">
           <Icon name="lucide:x" />
@@ -65,7 +65,19 @@ async function checkPassword() {
   }
 }
 
+useIntervalFn(async () => {
+  if (adminStore.password) {
+    try {
+      list.value = await $api.guideReviewList.query({
+        password: adminStore.password,
+      });
+    } catch (err) {}
+  }
+}, 10000);
+
+const approvePending = ref(false);
 async function approve(id: number) {
+  approvePending.value = true;
   try {
     await $api.modify.mutate({
       id,
@@ -79,6 +91,7 @@ async function approve(id: number) {
   } catch (err) {
     toast({ title: '审核失败', variant: 'destructive' });
   }
+  approvePending.value = false;
 }
 
 async function reject(id: number) {
@@ -95,4 +108,15 @@ async function reject(id: number) {
     toast({ title: '审核失败', variant: 'destructive' });
   }
 }
+
+useHead({
+  title: '管理 | 深中漫游指南',
+  meta: [{ name: 'description', content: '一份不太常规的深中入学指南。' }],
+});
+
+useServerSeoMeta({
+  title: '管理 | 深中漫游指南',
+  ogTitle: '管理 | 深中漫游指南',
+  description: '一份不太常规的深中入学指南。',
+});
 </script>

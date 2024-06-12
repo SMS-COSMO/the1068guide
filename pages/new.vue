@@ -1,5 +1,5 @@
 <template>
-  <PageTitle :new-button="false" title="增加新的内容" description="不知道写什么" />
+  <PageTitle :new-button="false" title="增加新的内容" description="向学弟学妹传授你的独家经验" />
 
   <div class="lg:w-1/4">
     <FormField v-slot="{ componentField }" name="primaryCategory">
@@ -98,6 +98,17 @@ const onSubmit = form.handleSubmit(async (values) => {
   } catch (err) {
 
   }
+});
+
+useHead({
+  title: '投稿 | 深中漫游指南',
+  meta: [{ name: 'description', content: '一份不太常规的深中入学指南。' }],
+});
+
+useServerSeoMeta({
+  title: '投稿 | 深中漫游指南',
+  ogTitle: '投稿 | 深中漫游指南',
+  description: '一份不太常规的深中入学指南。',
 });
 </script>
 

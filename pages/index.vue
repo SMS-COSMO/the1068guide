@@ -1,8 +1,7 @@
 <template>
   <section class="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
     <h1 class="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
-      [COSMO 图标]
-      <br>
+      <NuxtImg class="w-60 md:w-80 mb-6 mx-auto" src="/cosmo.svg" />
       深中漫游指南
     </h1>
     <span class="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl">
@@ -12,7 +11,7 @@
     <section class="flex w-full items-center justify-center space-x-4 py-4 md:pb-10">
       <NuxtLink to="/new">
         <Button size="lg" class="text-md">
-          <Icon name="lucide:plus" class="mr-1" />
+          <Icon name="lucide:plus" class="mr-1" size="20" />
           我要添加内容
         </Button>
       </NuxtLink>
@@ -49,6 +48,5 @@ useServerSeoMeta({
   title: '深中漫游指南',
   ogTitle: '深中漫游指南',
   description: '一份不太常规的深中入学指南。',
-  ogImage: 'https://oss.the1068.pictures/ogDefault.png',
 });
 </script>

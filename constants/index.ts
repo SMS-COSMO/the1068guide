@@ -60,6 +60,16 @@ export const categoryMap: Array<ICategory> = [{
     name: '主科（语数英）',
   }],
 }, {
+  value: 'intl',
+  name: '国际体系篇',
+  description: '国际体系的特供经验',
+  icon: 'lucide:globe',
+  to: '/intl',
+  secondary: [{
+    value: 'study',
+    name: '学习相关',
+  }],
+}, {
   value: 'tips',
   name: '小技巧篇',
   description: '在意想不到的时候很有用',
@@ -69,16 +79,6 @@ export const categoryMap: Array<ICategory> = [{
     value: 'life',
     name: '生活相关',
   }, {
-    value: 'study',
-    name: '学习相关',
-  }],
-}, {
-  value: 'intl',
-  name: '国际体系篇',
-  description: '国际体系的特供经验',
-  icon: 'lucide:globe',
-  to: '/intl',
-  secondary: [{
     value: 'study',
     name: '学习相关',
   }],

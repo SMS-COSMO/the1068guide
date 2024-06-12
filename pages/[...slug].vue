@@ -7,7 +7,7 @@
       {{ category.secondary.find(x => x.value === posts[0])?.name }}
     </h2>
 
-    <ol class="my-6 ml-6 list-decimal [&>li]:mt-2">
+    <ol class="my-6 ml-6 list-decimal [&>li]:mt-4">
       <li v-for="post in posts[1]" :key="post.id">
         <TiptapViewer :content="post.content" />
       </li>
@@ -47,6 +47,5 @@ useServerSeoMeta({
   title: `${category.value.name} | 深中漫游指南`,
   ogTitle: `${category.value.name} | 深中漫游指南`,
   description: '一份不太常规的深中入学指南。',
-  ogImage: 'https://oss.the1068.pictures/ogDefault.png',
 });
 </script>
