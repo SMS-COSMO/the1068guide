@@ -1,7 +1,8 @@
 <template>
   <section class="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
     <h1 class="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">
-      <NuxtImg class="w-60 md:w-80 mb-6 mx-auto" src="/cosmo.svg" />
+      <NuxtImg preload class="block dark:hidden w-60 md:w-80 mb-6 mx-auto" src="/cosmo.svg" />
+      <NuxtImg preload class="hidden dark:block w-60 md:w-80 mb-6 mx-auto" src="/cosmo-dark.svg" />
       深中漫游指南
     </h1>
     <span class="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl">

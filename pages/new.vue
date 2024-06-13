@@ -84,7 +84,7 @@ const form = useForm({ validationSchema: formSchema });
 const selectedPrimaryCategory = computed(
   () => categoryMap.find(e => e.value === form.values.primaryCategory),
 );
-watch(selectedPrimaryCategory, () => form.setFieldValue('secondaryCategory', undefined, false));
+watch(selectedPrimaryCategory, () => form.resetField('secondaryCategory'));
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {

@@ -2,8 +2,8 @@
   <header class="sticky z-40 top-0 bg-background/80 backdrop-blur-lg lg:border-b">
     <div class="container px-4 md:px-8 flex h-14 max-w-screen-xl items-center border-b lg:border-none gap-2 justify-between">
       <NuxtLink class="flex select-none h-full" to="/">
-        <NuxtImg class="dark:hidden h-10 self-center" src="/brand.svg" />
-        <NuxtImg class="hidden dark:flex h-10 self-center" src="/brand-dark.svg" />
+        <NuxtImg preload class="dark:hidden h-10 self-center" src="/brand.svg" />
+        <NuxtImg preload class="hidden dark:flex h-10 self-center" src="/brand-dark.svg" />
       </NuxtLink>
       <div class="flex justify-end gap-2">
         <DarkModeToggle />
