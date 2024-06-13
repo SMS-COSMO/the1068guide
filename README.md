@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://guide.the1068.pictures/" target="_blank" rel="noopener noreferrer">
-    <img width="500" src="https://github.com/SMS-COSMO/the1068guide/assets/49156174/d8841777-5784-4db9-b306-bbcc4cc5cf88" alt="the1068guide logo">
+    <img width="500" src="https://github.com/SMS-COSMO/the1068guide/assets/49156174/1cf0ab43-440e-4116-afa5-8ab4c5231ec5" alt="the1068guide logo">
   </a>
 </p>
 
