@@ -12,6 +12,13 @@
             <Icon name="lucide:github" size="18" />
           </Button>
         </NuxtLink>
+        <NuxtLink to="https://the1068.pictures/" target="_blank">
+          <Button variant="ghost" size="icon">
+            <span class="font-serif leading-[0.6rem] text-xs font-semibold">
+              10<br>68
+            </span>
+          </Button>
+        </NuxtLink>
       </div>
     </div>
   </header>
