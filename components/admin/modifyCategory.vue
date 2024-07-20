@@ -10,9 +10,27 @@
         <Button size="icon" variant="outline" @click="startEdit(post.id, post.content)">
           <Icon name="lucide:edit" />
         </Button>
-        <Button size="icon" variant="outline" @click="remove(post.id)">
-          <Icon name="lucide:trash" />
-        </Button>
+        <AlertDialog>
+          <AlertDialogTrigger>
+            <Button size="icon" variant="outline">
+              <Icon name="lucide:trash" />
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>确定要删除吗?</AlertDialogTitle>
+              <AlertDialogDescription>
+                此操作不可撤销，请仔细检查后再确认。
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter class="items-center">
+              <AlertDialogCancel>取消</AlertDialogCancel>
+              <AlertDialogAction @click="remove(post.id)">
+                删除
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </CardHeader>
     <CardContent>
