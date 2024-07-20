@@ -10,12 +10,12 @@ import { env } from '~/server/env';
 export const appRouter = router({
   guideList: publicProcedure
     .input(z.object({
-      primaryCategory: primaryCategorySchema,
+      primaryCategory: primaryCategorySchema.optional(),
     }))
     .query(async ({ input }) => {
       return await useDrizzle().query.guidebook.findMany({
         where: and(
-          eq(guidebook.primaryCategory, input.primaryCategory),
+          input.primaryCategory ? eq(guidebook.primaryCategory, input.primaryCategory) : undefined,
           eq(guidebook.isReviewed, true),
         ),
       });

@@ -6,6 +6,7 @@
         <NuxtImg preload class="hidden dark:flex h-10 self-center" src="/brand-dark.svg" />
       </NuxtLink>
       <div class="flex justify-end gap-2">
+        <Search />
         <DarkModeToggle />
         <NuxtLink to="https://github.com/SMS-COSMO/the1068guide" target="_blank">
           <Button variant="ghost" size="icon">
