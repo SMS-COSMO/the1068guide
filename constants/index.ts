@@ -19,6 +19,7 @@ export const secondaryCategorySchema = z.enum([
   'compulsories',
   'life',
   'study',
+  'overview',
 ]);
 
 export const categoryMap: Array<ICategory> = [{
@@ -50,6 +51,9 @@ export const categoryMap: Array<ICategory> = [{
   icon: 'lucide:book-marked',
   to: '/study',
   secondary: [{
+    value: 'overview',
+    name: '总体介绍',
+  }, {
     value: 'humanities',
     name: '文科',
   }, {

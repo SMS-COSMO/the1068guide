@@ -15,7 +15,8 @@ export type TSecondaryCategory =
   'science' |
   'compulsories' |
   'life' |
-  'study';
+  'study' |
+  'overview';
 
 export interface ICategory {
   value: TPrimaryCategory;

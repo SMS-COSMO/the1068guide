@@ -5,7 +5,7 @@ export const guidebook = sqliteTable('guidebook', {
   content: text('content').notNull(),
   primaryCategory: text('primaryCategory', { enum: ['life', 'study', 'tips', 'intl'] }).notNull(),
   secondaryCategory: text('secondaryCategory', {
-    enum: ['library', 'activity', 'dorm', 'food', 'club', 'humanities', 'science', 'compulsories', 'life', 'study'],
+    enum: ['library', 'activity', 'dorm', 'food', 'club', 'humanities', 'science', 'compulsories', 'life', 'study', 'overview'],
   }).notNull(),
   isReviewed: integer('is_reviewed', { mode: 'boolean' }).default(false).notNull(),
 });
