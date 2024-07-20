@@ -1,22 +1,22 @@
 <template>
   <Button variant="outline" class="md:w-48 justify-start gap-2" @click="open = !open">
     <Icon name="lucide:search" />
-    <span class="hidden md:block">
+    <span class="hidden md:block text-muted-foreground">
       搜索...
     </span>
   </Button>
 
   <Dialog v-model:open="open">
-    <DialogContent class="p-0">
+    <DialogContent class="p-0 max-w-2xl">
       <VisuallyHidden as-child>
         <DialogTitle />
       </VisuallyHidden>
       <VisuallyHidden as-child>
         <DialogDescription aria-describedby="undefined" />
       </VisuallyHidden>
-      <Command v-model:search-term="input" class="h-svh sm:h-[350px]">
+      <Command v-model:search-term="input" class="h-svh sm:h-[450px]">
         <CommandInput placeholder="搜索指南..." />
-        <CommandList>
+        <CommandList class="max-h-full">
           <template v-for="post in processedListData" :key="post.id">
             <CardHeader>
               <CardTitle class="text-lg">
