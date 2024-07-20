@@ -80,7 +80,6 @@ export const appRouter = router({
 
       await useDrizzle().delete(guidebook).where(eq(guidebook.id, input.id));
     }),
-
 });
 
 // export type definition of API

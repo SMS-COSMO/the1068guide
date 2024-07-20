@@ -34,7 +34,7 @@
   <footer class="text-muted-foreground py-6 md:px-8 md:py-0">
     <div class="container flex flex-col items-center justify-between gap-2 md:h-24 md:flex-row">
       <span class="text-sm">
-        Designed by COSMO in 2024.
+        Designed by COSMO.
       </span>
       <div class="flex gap-2">
         <NuxtLink to="/admin">

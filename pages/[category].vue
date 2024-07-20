@@ -22,19 +22,20 @@ import type { RouterOutput, TPrimaryCategory, TSecondaryCategory } from '~/types
 const { params } = useRoute();
 const { $api } = useNuxtApp();
 
-const slugCategory = params.slug[0] as TPrimaryCategory;
+const routeCategory = params.category as TPrimaryCategory;
 const category = computed(
-  () => categoryMap.find(x => x.value === slugCategory) || categoryMap[0],
+  () => categoryMap.find(x => x.value === routeCategory) || categoryMap[0],
 );
 
-const guideList = await $api.guideList.query({ primaryCategory: slugCategory });
+const { data: guideList } = await $api.guideList.useQuery({ primaryCategory: routeCategory });
 const data: Map<TSecondaryCategory, RouterOutput['guideList']> = new Map();
-for (const c of categoryMap.find(x => x.value === slugCategory)?.secondary ?? []) {
+for (const c of categoryMap.find(x => x.value === routeCategory)?.secondary ?? []) {
   data.set(
     c.value,
-    guideList
-      .filter(x => x.secondaryCategory === c.value)
-      ?.sort((a, b) => a.id - b.id),
+    guideList.value
+      ?.filter(x => x.secondaryCategory === c.value)
+      ?.sort((a, b) => a.id - b.id)
+      ?? [],
   );
 }
 

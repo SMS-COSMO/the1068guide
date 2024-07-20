@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-2 box-border w-full rounded-md border shadow-sm">
+  <div class="box-border w-full rounded-md border shadow-sm">
     <ToggleGroup class="justify-start border-b p-1.5" size="sm" type="multiple">
       <ToggleGroupItem
         value="bold"

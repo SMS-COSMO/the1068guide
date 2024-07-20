@@ -95,9 +95,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       description: '等待管理员审核中~',
     });
     navigateTo('/');
-  } catch (err) {
-
-  }
+  } catch {}
 });
 
 useHead({
