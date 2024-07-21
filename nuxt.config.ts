@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+
   modules: [
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
@@ -11,17 +12,21 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
   ],
+
   hub: {
     database: true,
+    blob: true,
   },
+
   routeRules: {
-    '/new': {
-      ssr: false,
-    },
+    '/': { prerender: true },
+    '/new': { ssr: false },
   },
+
   build: {
     transpile: ['trpc-nuxt'],
   },
+
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -33,6 +38,7 @@ export default defineNuxtConfig({
      */
     componentDir: './components/ui',
   },
+
   typescript: {
     tsConfig: {
       compilerOptions: {
@@ -40,4 +46,12 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  vite: {
+    optimizeDeps: {
+      exclude: ['vee-validate'],
+    },
+  },
+
+  compatibilityDate: '2024-07-21',
 });

@@ -25,7 +25,7 @@
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.31.4",
     "fuse.js": "^7.0.0",
-    "nuxt": "3.11.2",
+    "nuxt": "^3.12.4",
     "radix-vue": "^1.9.2",
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.4.0",
@@ -37,7 +37,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.23.0",
+    "@antfu/eslint-config": "^2.23.1",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@tiptap/core": "^2.5.4",
@@ -51,6 +51,7 @@
     "@tiptap/extension-text": "^2.5.4",
     "@tiptap/extension-underline": "^2.5.4",
     "@tiptap/html": "^2.5.4",
+    "@tiptap/pm": "^2.5.4",
     "@tiptap/starter-kit": "^2.5.4",
     "@tiptap/vue-3": "^2.5.4",
     "@vueuse/core": "^10.11.0",
