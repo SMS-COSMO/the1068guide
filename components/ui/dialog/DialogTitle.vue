@@ -13,8 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { DialogTitle, type DialogTitleProps, useForwardProps } from 'radix-vue';
+import type { DialogTitleProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { DialogTitle, useForwardProps } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = defineProps<DialogTitleProps & { class?: HTMLAttributes['class'] }>();

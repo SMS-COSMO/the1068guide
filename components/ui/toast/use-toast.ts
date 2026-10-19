@@ -1,21 +1,24 @@
-import { computed, ref } from 'vue';
 import type { Component, VNode } from 'vue';
-import type { ToastProps } from '.';
+import { computed, ref } from 'vue';
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
 
-export type StringOrVNode =
-  | string
-  | VNode
-  | (() => VNode);
+export type StringOrVNode
+  = | string
+    | VNode
+    | (() => VNode);
 
-type ToasterToast = ToastProps & {
+interface ToasterToast {
   id: string;
   title?: string;
   description?: StringOrVNode;
   action?: Component;
-};
+  variant?: 'default' | 'destructive';
+  class?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
 
 const actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
@@ -33,8 +36,8 @@ function genId() {
 
 type ActionType = typeof actionTypes;
 
-type Action =
-  | {
+type Action
+  = | {
     type: ActionType['ADD_TOAST'];
     toast: ToasterToast;
   }

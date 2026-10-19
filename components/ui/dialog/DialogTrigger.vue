@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { DialogTrigger, type DialogTriggerProps } from 'radix-vue';
+import type { DialogTriggerProps } from 'reka-ui';
+import { DialogTrigger } from 'reka-ui';
 
 const props = defineProps<DialogTriggerProps>();
 </script>

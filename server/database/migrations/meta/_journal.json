@@ -8,6 +8,13 @@
       "when": 1718080865784,
       "tag": "0000_nappy_ricochet",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1792434721024,
+      "tag": "0001_login_attempts",
+      "breakpoints": true
     }
   ]
 }

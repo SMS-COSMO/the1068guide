@@ -16,16 +16,23 @@
 </template>
 
 <script setup lang="ts">
-import { categoryMap } from '~/constants';
 import type { RouterOutput, TPrimaryCategory, TSecondaryCategory } from '~/types';
+import { categoryMap } from '~/constants';
 
 const { params } = useRoute();
 const { $api } = useNuxtApp();
 
-const routeCategory = params.category as TPrimaryCategory;
-const category = computed(
-  () => categoryMap.find(x => x.value === routeCategory) || categoryMap[0],
-);
+const rawCategory = Array.isArray(params.category) ? params.category[0] : params.category;
+const matchedCategory = categoryMap.find(category => category.value === rawCategory);
+if (!matchedCategory) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: '页面不存在',
+  });
+}
+
+const routeCategory: TPrimaryCategory = matchedCategory.value;
+const category = computed(() => matchedCategory);
 
 const { data: guideList } = await $api.guideList.useQuery({ primaryCategory: routeCategory });
 const data: Map<TSecondaryCategory, RouterOutput['guideList']> = new Map();

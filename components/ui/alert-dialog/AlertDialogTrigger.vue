@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { AlertDialogTrigger, type AlertDialogTriggerProps } from 'radix-vue';
+import type { AlertDialogTriggerProps } from 'reka-ui';
+import { AlertDialogTrigger } from 'reka-ui';
 
 const props = defineProps<AlertDialogTriggerProps>();
 </script>

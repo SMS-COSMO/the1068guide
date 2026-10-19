@@ -7,14 +7,13 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import type { ComboboxContentEmits, ComboboxContentProps } from 'radix-vue';
-import { ComboboxContent, useForwardPropsEmits } from 'radix-vue';
+import type { ComboboxContentEmits, ComboboxContentProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ComboboxContent, useForwardPropsEmits } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
-const props = withDefaults(defineProps<ComboboxContentProps & { class?: HTMLAttributes['class'] }>(), {
-  dismissable: false,
-});
+const props = defineProps<ComboboxContentProps & { class?: HTMLAttributes['class'] }>();
 const emits = defineEmits<ComboboxContentEmits>();
 
 const delegatedProps = computed(() => {

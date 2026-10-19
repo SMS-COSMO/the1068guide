@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Slot } from 'radix-vue';
+import { Slot } from 'reka-ui';
 import { useFormField } from './useFormField';
 
 const { error, formItemId, formDescriptionId, formMessageId } = useFormField();

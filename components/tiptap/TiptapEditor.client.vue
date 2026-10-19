@@ -49,8 +49,8 @@
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import { Editor, EditorContent } from './vue';
 import { tipTapExtensions } from './extensions';
+import { Editor, EditorContent } from './vue';
 
 const props = defineProps<{
   modelValue: string | null | undefined;
