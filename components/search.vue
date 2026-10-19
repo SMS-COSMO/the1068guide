@@ -26,9 +26,11 @@
           <template v-for="post in processedListData" :key="post.id">
             <CardHeader>
               <CardTitle class="text-lg">
-                {{ categoryMap.find(x => x.value === post.primaryCategory)?.name }}
-                <Icon name="lucide:chevron-right" class="mb-1.5" />
-                {{ categoryMap.find(x => x.value === post.primaryCategory)?.secondary.find(x => x.value === post.secondaryCategory)?.name }}
+                <span class="inline-flex items-center gap-1">
+                  <span>{{ categoryMap.find(x => x.value === post.primaryCategory)?.name }}</span>
+                  <Icon name="lucide:chevron-right" class="size-4 shrink-0" />
+                  <span>{{ categoryMap.find(x => x.value === post.primaryCategory)?.secondary.find(x => x.value === post.secondaryCategory)?.name }}</span>
+                </span>
               </CardTitle>
             </CardHeader>
             <CardContent>

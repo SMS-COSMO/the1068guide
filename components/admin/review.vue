@@ -9,9 +9,11 @@
   <Card v-for="post in list" :key="post.id" class="mb-4">
     <CardHeader class="flex flex-row">
       <CardTitle class="text-lg">
-        {{ categoryMap.find(x => x.value === post.primaryCategory)?.name }}
-        <Icon name="lucide:chevron-right" class="mb-1.5" />
-        {{ categoryMap.find(x => x.value === post.primaryCategory)?.secondary.find(x => x.value === post.secondaryCategory)?.name }}
+        <span class="inline-flex items-center gap-1">
+          <span>{{ categoryMap.find(x => x.value === post.primaryCategory)?.name }}</span>
+          <Icon name="lucide:chevron-right" class="size-4 shrink-0" />
+          <span>{{ categoryMap.find(x => x.value === post.primaryCategory)?.secondary.find(x => x.value === post.secondaryCategory)?.name }}</span>
+        </span>
       </CardTitle>
       <div class="ml-auto space-x-2">
         <Button size="icon" variant="outline" @click="approve(post.id)">
