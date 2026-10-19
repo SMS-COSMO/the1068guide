@@ -8,15 +8,17 @@
   >
     <slot />
     <SelectIcon as-child>
-      <CaretSortIcon class="w-4 h-4 opacity-50" />
+      <ChevronsUpDown class="w-4 h-4 opacity-50" />
     </SelectIcon>
   </SelectTrigger>
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { SelectIcon, SelectTrigger, type SelectTriggerProps, useForwardProps } from 'radix-vue';
-import { CaretSortIcon } from '@radix-icons/vue';
+import type { SelectTriggerProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ChevronsUpDown } from '@lucide/vue';
+import { SelectIcon, SelectTrigger, useForwardProps } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = defineProps<SelectTriggerProps & { class?: HTMLAttributes['class'] }>();

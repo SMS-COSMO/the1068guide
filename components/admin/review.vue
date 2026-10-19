@@ -30,32 +30,22 @@
 
 <script setup lang="ts">
 import { getQueryKey } from 'trpc-nuxt/client';
-import { categoryMap } from '~/constants';
 import { useToast } from '~/components/ui/toast';
-import { useAdminStore } from '~/store/admin';
+import { categoryMap } from '~/constants';
 
 const { toast } = useToast();
 const { $api } = useNuxtApp();
 
-const adminStore = useAdminStore();
+const { data: list, error, refresh } = $api.guideReviewList.useQuery(undefined);
+const queryKey = getQueryKey($api.guideReviewList);
 
-const { data: list, error } = await $api.guideReviewList.useQuery({
-  password: adminStore.password,
-});
-const queryKey = getQueryKey($api.guideReviewList, { password: adminStore.password });
-
-if (error.value) {
-  navigateTo('/login');
-}
+watch(error, (value) => {
+  if (value)
+    navigateTo('/login');
+}, { immediate: true });
 
 useIntervalFn(async () => {
-  if (adminStore.password) {
-    try {
-      list.value = await $api.guideReviewList.query({
-        password: adminStore.password,
-      });
-    } catch {}
-  }
+  await refresh();
 }, 10000);
 
 const approvePending = ref(false);
@@ -64,7 +54,6 @@ async function approve(id: number) {
   try {
     await $api.modify.mutate({
       id,
-      password: adminStore.password,
       isReviewed: true,
     });
     toast({ title: '成功通过' });
@@ -77,10 +66,7 @@ async function approve(id: number) {
 
 async function reject(id: number) {
   try {
-    await $api.remove.mutate({
-      id,
-      password: adminStore.password,
-    });
+    await $api.remove.mutate({ id });
     toast({ title: '成功拒绝' });
     await refreshNuxtData(queryKey);
   } catch {

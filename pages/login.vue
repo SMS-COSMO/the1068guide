@@ -10,10 +10,12 @@
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Input v-model="inputPassword" type="password" />
-        <Button class="w-full mt-4" @click="checkPassword">
-          登陆
-        </Button>
+        <form @submit.prevent="checkPassword">
+          <Input v-model="inputPassword" type="password" autocomplete="current-password" />
+          <Button class="w-full mt-4" type="submit" :disabled="pending">
+            登陆
+          </Button>
+        </form>
       </CardContent>
     </Card>
   </div>
@@ -21,21 +23,39 @@
 
 <script setup lang="ts">
 import { useToast } from '~/components/ui/toast';
-import { useAdminStore } from '~/store/admin';
 
 const { toast } = useToast();
-const { $api } = useNuxtApp();
-const adminStore = useAdminStore();
+const { fetch } = useUserSession();
 
 const inputPassword = ref('');
+const pending = ref(false);
+
 async function checkPassword() {
+  pending.value = true;
   try {
-    await $api.checkPassword.query({ password: inputPassword.value });
-    adminStore.password = inputPassword.value;
+    await $fetch('/api/auth/login', {
+      method: 'POST',
+      body: { password: inputPassword.value },
+    });
+    await fetch();
     toast({ title: '登陆成功' });
-    navigateTo('/admin');
-  } catch {
-    toast({ variant: 'destructive', title: '密码错误' });
+    await navigateTo('/admin');
+  } catch (error: unknown) {
+    const status = typeof error === 'object' && error && 'statusCode' in error
+      ? Number(error.statusCode)
+      : 0;
+    const title = status === 429
+      ? '尝试次数过多，请稍后再试'
+      : status === 401
+        ? '密码错误'
+        : '登录失败，请稍后再试';
+    toast({ variant: 'destructive', title });
+  } finally {
+    pending.value = false;
   }
 }
+
+useHead({
+  title: '登录 | 深中漫游指南',
+});
 </script>

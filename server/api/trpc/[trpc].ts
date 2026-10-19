@@ -1,16 +1,34 @@
-/**
- * This is the API-handler of your app that contains all your API routes.
- * On a bigger app, you will probably want to split this file up into multiple files.
- */
-import { createNuxtApiHandler } from 'trpc-nuxt';
+import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
+import { createTRPCContext } from '~/server/trpc/context';
 import { appRouter } from '~/server/trpc/routers';
 
-// export only the type definition of the API
-// None of the actual implementation is exposed to the client
 export type AppRouter = typeof appRouter;
 
-// export API handler
-export default createNuxtApiHandler({
-  router: appRouter,
-  createContext: () => ({}),
+export default defineEventHandler(async (event) => {
+  const url = getRequestURL(event);
+  const headers = new Headers();
+  for (const [key, value] of Object.entries(getRequestHeaders(event))) {
+    if (value === undefined)
+      continue;
+    headers.set(key, Array.isArray(value) ? value.join(', ') : value);
+  }
+
+  // trpc-nuxt's fetch adapter reads getRequestWebStream(), which is empty
+  // for Node requests on this Nitro version, so mutations arrived without input.
+  const body = event.method === 'GET' || event.method === 'HEAD'
+    ? undefined
+    : await readRawBody(event);
+
+  const request = new Request(url, {
+    method: event.method,
+    headers,
+    body: body && body.length > 0 ? body : undefined,
+  });
+
+  return fetchRequestHandler({
+    endpoint: '/api/trpc',
+    router: appRouter,
+    req: request,
+    createContext: () => createTRPCContext(event),
+  });
 });

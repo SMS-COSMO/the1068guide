@@ -5,8 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { ToastAction, type ToastActionProps } from 'radix-vue';
+import type { ToastActionProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ToastAction } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = defineProps<ToastActionProps & { class?: HTMLAttributes['class'] }>();

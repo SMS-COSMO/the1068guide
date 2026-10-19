@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center border-b px-3" cmdk-input-wrapper>
-    <MagnifyingGlassIcon class="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    <Search class="mr-2 h-4 w-4 shrink-0 opacity-50" />
     <ComboboxInput
       v-bind="{ ...forwardedProps, ...$attrs }"
       auto-focus
@@ -10,9 +10,11 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { MagnifyingGlassIcon } from '@radix-icons/vue';
-import { ComboboxInput, type ComboboxInputProps, useForwardProps } from 'radix-vue';
+import type { ComboboxInputProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { Search } from '@lucide/vue';
+import { ComboboxInput, useForwardProps } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 defineOptions({

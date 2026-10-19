@@ -8,8 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { AlertDialogTitle, type AlertDialogTitleProps } from 'radix-vue';
+import type { AlertDialogTitleProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { AlertDialogTitle } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = defineProps<AlertDialogTitleProps & { class?: HTMLAttributes['class'] }>();

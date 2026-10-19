@@ -1,5 +1,5 @@
-import { z } from 'zod';
 import type { ICategory } from '~/types';
+import { z } from 'zod';
 
 export const primaryCategorySchema = z.enum([
   'life',

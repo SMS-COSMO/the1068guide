@@ -9,10 +9,12 @@
 </template>
 
 <script setup lang="ts">
+import type { ToastRootEmits } from 'reka-ui';
+import type { ToastProps } from '.';
+import { ToastRoot, useForwardPropsEmits } from 'reka-ui';
 import { computed } from 'vue';
-import { ToastRoot, type ToastRootEmits, useForwardPropsEmits } from 'radix-vue';
-import { type ToastProps, toastVariants } from '.';
 import { cn } from '@/lib/utils';
+import { toastVariants } from '.';
 
 const props = defineProps<ToastProps>();
 

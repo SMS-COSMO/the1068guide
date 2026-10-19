@@ -8,9 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import type { ComboboxRootEmits, ComboboxRootProps } from 'radix-vue';
-import { ComboboxRoot, useForwardPropsEmits } from 'radix-vue';
+import type { ComboboxRootEmits, ComboboxRootProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ComboboxRoot, useForwardPropsEmits } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = withDefaults(defineProps<ComboboxRootProps & { class?: HTMLAttributes['class'] }>(), {

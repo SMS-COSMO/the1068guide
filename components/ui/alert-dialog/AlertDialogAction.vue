@@ -5,10 +5,12 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { AlertDialogAction, type AlertDialogActionProps } from 'radix-vue';
-import { cn } from '@/lib/utils';
+import type { AlertDialogActionProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { AlertDialogAction } from 'reka-ui';
+import { computed } from 'vue';
 import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const props = defineProps<AlertDialogActionProps & { class?: HTMLAttributes['class'] }>();
 

@@ -1,5 +1,5 @@
 <template>
-  <Tabs :default-value="categoryMap[0].value" class="mt-4">
+  <Tabs :default-value="categoryMap[0]?.value ?? 'life'" class="mt-4">
     <TabsList class="grid w-full grid-cols-4">
       <TabsTrigger v-for="category in categoryMap" :key="category.value" :value="category.value">
         <Icon :name="category.icon" class="mr-2" />

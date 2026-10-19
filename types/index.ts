@@ -5,18 +5,18 @@ export type RouterOutput = inferRouterOutputs<AppRouter>;
 export type RouterInput = inferRouterInputs<AppRouter>;
 
 export type TPrimaryCategory = 'life' | 'study' | 'intl' | 'tips';
-export type TSecondaryCategory =
-  'library' |
-  'activity' |
-  'dorm' |
-  'food' |
-  'club' |
-  'humanities' |
-  'science' |
-  'compulsories' |
-  'life' |
-  'study' |
-  'overview';
+export type TSecondaryCategory
+  = 'library'
+    | 'activity'
+    | 'dorm'
+    | 'food'
+    | 'club'
+    | 'humanities'
+    | 'science'
+    | 'compulsories'
+    | 'life'
+    | 'study'
+    | 'overview';
 
 export interface ICategory {
   value: TPrimaryCategory;

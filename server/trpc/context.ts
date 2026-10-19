@@ -1,9 +1,11 @@
-import type { inferAsyncReturnType } from '@trpc/server';
+import type { H3Event } from 'h3';
 
-/**
- * Creates context for an incoming request
- * @link https://trpc.io/docs/context
- */
-export const createContext = () => ({});
+export async function createTRPCContext(event: H3Event) {
+  const session = await getUserSession(event);
+  return {
+    event,
+    user: session.user?.role === 'admin' ? session.user : null,
+  };
+}
 
-export type Context = inferAsyncReturnType<typeof createContext>;
+export type Context = Awaited<ReturnType<typeof createTRPCContext>>;

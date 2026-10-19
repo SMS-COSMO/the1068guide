@@ -65,11 +65,11 @@
 </template>
 
 <script setup lang="ts">
-import * as z from 'zod';
 import { toTypedSchema } from '@vee-validate/zod';
 import { useForm } from 'vee-validate';
-import { categoryMap, primaryCategorySchema, secondaryCategorySchema } from '~/constants';
+import * as z from 'zod';
 import { useToast } from '@/components/ui/toast/use-toast';
+import { categoryMap, primaryCategorySchema, secondaryCategorySchema } from '~/constants';
 
 const { toast } = useToast();
 const { $api } = useNuxtApp();
@@ -95,7 +95,13 @@ const onSubmit = form.handleSubmit(async (values) => {
       description: '等待管理员审核中~',
     });
     navigateTo('/');
-  } catch {}
+  } catch {
+    toast({
+      variant: 'destructive',
+      title: '投稿失败',
+      description: '请稍后再试',
+    });
+  }
 });
 
 useHead({

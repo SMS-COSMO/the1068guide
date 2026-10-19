@@ -51,11 +51,10 @@
 </template>
 
 <script setup lang="ts">
-import { getQueryKey } from 'trpc-nuxt/client';
-import { useToast } from '../ui/toast';
-import { categoryMap } from '~/constants';
-import { useAdminStore } from '~/store/admin';
 import type { TPrimaryCategory } from '~/types';
+import { getQueryKey } from 'trpc-nuxt/client';
+import { categoryMap } from '~/constants';
+import { useToast } from '../ui/toast';
 
 const props = defineProps<{
   category: TPrimaryCategory;
@@ -63,7 +62,6 @@ const props = defineProps<{
 
 const { toast } = useToast();
 const { $api } = useNuxtApp();
-const adminStore = useAdminStore();
 
 const { data: list } = await $api.guideList.useQuery({ primaryCategory: props.category });
 const queryKey = getQueryKey($api.guideList, { primaryCategory: props.category });
@@ -72,7 +70,7 @@ const editing = ref();
 
 async function remove(id: number) {
   try {
-    await $api.remove.mutate({ password: adminStore.password, id });
+    await $api.remove.mutate({ id });
     await refreshNuxtData(queryKey);
     toast({ title: '删除成功' });
   } catch {
@@ -88,7 +86,7 @@ function startEdit(id: number, content: string) {
 
 async function modify(id: number) {
   try {
-    await $api.modify.mutate({ password: adminStore.password, id, content: newContent.value });
+    await $api.modify.mutate({ id, content: newContent.value });
     await refreshNuxtData(queryKey);
     editing.value = undefined;
     newContent.value = undefined;

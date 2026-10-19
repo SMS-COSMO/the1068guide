@@ -1,4 +1,9 @@
 <template>
+  <div class="mb-4 flex items-center justify-end">
+    <Button variant="outline" @click="logout">
+      退出登录
+    </Button>
+  </div>
   <Tabs default-value="review">
     <TabsList class="grid w-40 grid-cols-2">
       <TabsTrigger value="review">
@@ -18,6 +23,17 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'admin',
+});
+
+const { clear } = useUserSession();
+
+async function logout() {
+  await clear();
+  await navigateTo('/login');
+}
+
 useHead({
   title: '管理 | 深中漫游指南',
   meta: [{ name: 'description', content: '一份不太常规的深中入学指南。' }],

@@ -14,9 +14,15 @@
       <VisuallyHidden as-child>
         <DialogDescription aria-describedby="undefined" />
       </VisuallyHidden>
-      <Command v-model:search-term="input" class="h-svh sm:h-[450px]">
-        <CommandInput placeholder="搜索指南..." />
+      <Command :ignore-filter="true" class="h-svh sm:h-[450px]">
+        <CommandInput v-model="input" placeholder="搜索指南..." />
         <CommandList class="max-h-full">
+          <p v-if="loading" class="p-4 text-sm text-muted-foreground">
+            加载中...
+          </p>
+          <p v-else-if="loadError" class="p-4 text-sm text-muted-foreground">
+            搜索索引加载失败
+          </p>
           <template v-for="post in processedListData" :key="post.id">
             <CardHeader>
               <CardTitle class="text-lg">
@@ -37,15 +43,24 @@
 </template>
 
 <script setup lang="ts">
-import { generateHTML } from '@tiptap/html';
+import type { TPrimaryCategory, TSecondaryCategory } from '~/types';
 import { useFuse } from '@vueuse/integrations/useFuse';
-import { VisuallyHidden } from 'radix-vue';
-import { tipTapExtensions } from './tiptap/extensions';
+import { VisuallyHidden } from 'reka-ui';
 import { categoryMap } from '~/constants';
+import { guideHtml } from './tiptap/html';
 
-const { $api } = useNuxtApp();
+interface GuideEntry {
+  id: number;
+  content: string;
+  primaryCategory: TPrimaryCategory;
+  secondaryCategory: TSecondaryCategory;
+}
 
 const open = ref(false);
+const input = ref('');
+const list = ref<GuideEntry[] | null>(null);
+const loading = ref(false);
+const loadError = ref(false);
 
 const { Meta_K, Ctrl_K } = useMagicKeys({
   passive: false,
@@ -60,17 +75,29 @@ watch([Meta_K, Ctrl_K], (v) => {
     open.value = true;
 });
 
-const input = ref('');
+async function ensureGuides() {
+  if (list.value || loading.value)
+    return;
 
-const { data: list } = await $api.guideList.useQuery({});
-
-const preprocessedList = computed(() => list.value?.map((x) => {
-  const { content, ...rest } = x;
-  let json = {};
+  loading.value = true;
+  loadError.value = false;
   try {
-    json = JSON.parse(content);
-  } catch {}
-  const html = generateHTML(json, tipTapExtensions);
+    list.value = await $fetch<GuideEntry[]>('/api/guides');
+  } catch {
+    loadError.value = true;
+  } finally {
+    loading.value = false;
+  }
+}
+
+watch(open, (isOpen) => {
+  if (isOpen)
+    void ensureGuides();
+});
+
+const preprocessedList = computed(() => (list.value ?? []).map((entry) => {
+  const { content, ...rest } = entry;
+  const html = guideHtml(content);
 
   return {
     content,
@@ -79,7 +106,7 @@ const preprocessedList = computed(() => list.value?.map((x) => {
   };
 }));
 
-const fuse = useFuse(input, ref(preprocessedList.value ?? []), {
+const fuse = useFuse(input, preprocessedList, {
   fuseOptions: {
     keys: ['searchPrompt'],
     shouldSort: true,
@@ -88,7 +115,6 @@ const fuse = useFuse(input, ref(preprocessedList.value ?? []), {
 });
 
 const processedListData = computed(
-  () => fuse.results.value
-    .map(e => e.item),
+  () => fuse.results.value.map(entry => entry.item),
 );
 </script>

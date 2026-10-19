@@ -14,8 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue';
-import { ScrollAreaScrollbar, type ScrollAreaScrollbarProps, ScrollAreaThumb } from 'radix-vue';
+import type { ScrollAreaScrollbarProps } from 'reka-ui';
+import type { HTMLAttributes } from 'vue';
+import { ScrollAreaScrollbar, ScrollAreaThumb } from 'reka-ui';
+import { computed } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = withDefaults(defineProps<ScrollAreaScrollbarProps & { class?: HTMLAttributes['class'] }>(), {

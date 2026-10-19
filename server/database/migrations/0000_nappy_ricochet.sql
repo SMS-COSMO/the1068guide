@@ -1,4 +1,4 @@
-CREATE TABLE `guidebook` (
+CREATE TABLE IF NOT EXISTS `guidebook` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`content` text NOT NULL,
 	`primaryCategory` text NOT NULL,
